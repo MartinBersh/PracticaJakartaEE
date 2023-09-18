@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title>JSP - Clases</title>
 </head>
 <body>
 <h3><%= "Formulario Clases" %>
@@ -24,6 +24,6 @@
   </div>
 </form>
 <br/>
-<a href="student-form">Vamos a SubjectController</a>
+<a href="subject-form">Vamos a SubjectController</a>
 </body>
 </html>

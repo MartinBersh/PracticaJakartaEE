@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title>JSP - Profesores</title>
 </head>
 <body>
 <h3><%= "Formulario profesores" %>
@@ -20,6 +20,6 @@
   </div>
 </form>
 <br/>
-<a href="student-form">Vamos a TeacherController</a>
+<a href="teacher-form">Vamos a TeacherController</a>
 </body>
 </html>

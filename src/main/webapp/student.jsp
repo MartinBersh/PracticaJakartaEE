@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>JSP - Estudiantes</title>
 </head>
 <body>
 <h3><%= "Formulario estudiantes" %>
