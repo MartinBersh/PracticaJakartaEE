@@ -39,7 +39,5 @@ public class LoginServlet extends HttpServlet {
         } else {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Lo sentimos no esta autorizado" +
                     "para ingresar a esta página!");
-
     }
-
-}
+}}
