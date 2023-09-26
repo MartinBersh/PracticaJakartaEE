@@ -2,22 +2,23 @@ package services.servicesImpl;
 
 import lombok.NoArgsConstructor;
 import org.example.mapping.dto.SubjectDto;
+import repository.Repository;
 import repository.repositoryImpl.StudentRespositoryLogicImpl;
 import repository.repositoryImpl.SubjectRepositoryImpl;
 import repository.repositoryImpl.SubjectRepositoryLogicImpl;
 import services.SubjectService;
 
+import java.sql.Connection;
 import java.util.List;
 @NoArgsConstructor
 
 
 public class SubjectServiceImpl implements SubjectService {
-    SubjectRepositoryLogicImpl repo = new SubjectRepositoryLogicImpl();
+    private Repository<SubjectDto> repo;
 
-    public SubjectServiceImpl(SubjectRepositoryLogicImpl repository) {
-        this.repo = repository;
+    public SubjectServiceImpl(Connection connection){
+        this.repo = new SubjectRepositoryImpl(connection);
     }
-
     @Override
     public List<SubjectDto> list() {
         return repo.list();

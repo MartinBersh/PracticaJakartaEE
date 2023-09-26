@@ -1,7 +1,9 @@
 package repository.repositoryImpl;
 
+import lombok.NoArgsConstructor;
 import org.example.conexion.ConexionDB;
 import org.example.domain.Student;
+import org.example.exception.ServiceJdbcException;
 import org.example.mapping.dto.StudentDto;
 import org.example.mapping.mappers.StudentMapper;
 import repository.Repository;
@@ -10,10 +12,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
+
 public class StudentRepositoryImp implements Repository<StudentDto> {
-    private Connection getConnection() throws SQLException {
-        return ConexionDB.getInstance();
+    private Connection conn;
+    public StudentRepositoryImp(Connection conn) {
+        this.conn = conn;
     }
+
     private Student createStudent(ResultSet rs) throws SQLException {
         Student student = new Student();
         student.setId_Student(rs.getLong("id_student"));
@@ -24,34 +30,34 @@ public class StudentRepositoryImp implements Repository<StudentDto> {
         return student;
     }
     @Override
-    public List<StudentDto> list() {
+    public List<StudentDto> list(){
         List<Student> studentList = new ArrayList<>();
 
-        try (Statement statement = getConnection().createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * from student")) {
-            while (resultSet.next()) {
-                Student student = createStudent(resultSet);
-                studentList.add(student);
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * from students")) {
+            while (rs.next()) {
+                Student ps= createStudent(rs);
+                studentList.add(ps);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ServiceJdbcException("Unable to list info");
         }
         return StudentMapper.mapFrom(studentList);
     }
 
+
     @Override
     public StudentDto byId(Long id) {
         Student student = null;
-        try (PreparedStatement preparedStatement = getConnection()
-                .prepareStatement("SELECT * FROM student WHERE id_student=?")) {
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                student = createStudent(resultSet);
+        try (PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM student WHERE id_student=?")) {
+            pstmt.setLong(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    student = createStudent(rs);
+                }
             }
-            resultSet.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ServiceJdbcException("Unable to find info");
         }
         return StudentMapper.mapFrom(student);
     }
@@ -59,33 +65,34 @@ public class StudentRepositoryImp implements Repository<StudentDto> {
     @Override
     public void update(StudentDto student) {
         String sql;
-        if (student.id_Student() != null && student.id_Student()>0) {
+        if (student.id_Student() != null && student.id_Student() > 0) {
             sql = "UPDATE student SET name=?, career=?, email=?, semester=? WHERE id_student=?";
         } else {
             sql = "INSERT INTO student (name, career, email, semester) VALUES(?,?,?,?)";
         }
-        try(PreparedStatement stmt = getConnection().prepareStatement(sql)) {
-            stmt.setString(1, student.name());
-            stmt.setString(2, student.career());
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, student.name());
+            pstmt.setString(2, student.career());
+            pstmt.setString(3, student.email());
 
             if (student.id_Student() != null && student.id_Student() > 0) {
-                stmt.setString(3, student.email());
-                stmt.setLong(4, student.id_Student());
+                pstmt.setLong(4, student.id_Student());
             }
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            pstmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throw new ServiceJdbcException("Unable to save info");
         }
     }
 
     @Override
     public void delete(Long id) {
-        try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM student WHERE id_student =?")){
-            stmt.setLong(1, id);
-            stmt.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        try (PreparedStatement pstmt = conn.prepareStatement("DELETE FROM student WHERE id_student = ?")) {
+            pstmt.setLong(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new ServiceJdbcException("Unable to delete info");
         }
     }
+
+
 }

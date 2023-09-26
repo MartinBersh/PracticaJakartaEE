@@ -8,25 +8,25 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.mapping.dto.StudentDto;
 import org.example.mapping.dto.TeacherDto;
 import repository.repositoryImpl.StudentRespositoryLogicImpl;
+import repository.repositoryImpl.SubjectRepositoryImpl;
+import repository.repositoryImpl.TeacherRepositoryImpl;
 import repository.repositoryImpl.TeacherRepositoryLogicImpl;
 import services.StudentService;
 import services.TeacherService;
+import services.servicesImpl.SubjectServiceImpl;
 import services.servicesImpl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 @WebServlet(name = "studentController", value = "/student-form")
 
 public class TeacherController extends HttpServlet {
 
-    public TeacherRepositoryLogicImpl teacherRepository;
+    public TeacherRepositoryImpl teacherRepository;
     public TeacherService service;
 
-    public TeacherController() {
-        teacherRepository = new TeacherRepositoryLogicImpl();
-        service = new TeacherServiceImpl(teacherRepository);
-    }
 
     private String message;
 
@@ -36,6 +36,9 @@ public class TeacherController extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
+        Connection conn = (Connection) request.getAttribute("conn");
+        teacherRepository = new TeacherRepositoryImpl(conn);
+        service = new TeacherServiceImpl(conn);
 
         // Hello
         PrintWriter out = response.getWriter();
@@ -48,6 +51,9 @@ public class TeacherController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        Connection conn = (Connection) req.getAttribute("conn");
+        teacherRepository = new TeacherRepositoryImpl(conn);
+        service = new TeacherServiceImpl(conn);
 
         String name = req.getParameter("name");
         String email = req.getParameter("email");

@@ -95,7 +95,7 @@ public class GradesRepositoryImp implements Repository<GradesDto> {
         if (grades.id_Grades() != null && grades.id_Grades() > 0) {
             sql = "UPDATE grades SET id_student=?, id_subject=? , corte=?  WHERE id_grades=?";
         } else {
-            sql = "INSERT INTO grades (id_student, id,subject, semester, corte) VALUES(?,?)";
+            sql = "INSERT INTO grades (id_student, id,subject, corte) VALUES(?,?)";
         }
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
             stmt.setLong(1, grades.student().getId_Student());

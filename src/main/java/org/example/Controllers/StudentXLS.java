@@ -22,10 +22,6 @@ public class StudentXLS extends HttpServlet {
     public StudentRespositoryLogicImpl student;
     public StudentService service;
 
-    public StudentXLS() {
-        student = new StudentRespositoryLogicImpl();
-        service = new StudentServiceImpl(student);
-    }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {

@@ -1,8 +1,11 @@
 package repository.repositoryImpl;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.example.conexion.ConexionDB;
 import org.example.domain.Subject;
 import org.example.domain.Teacher;
+import org.example.exception.ServiceJdbcException;
 import org.example.mapping.dto.SubjectDto;
 import org.example.mapping.mappers.SubjectMapper;
 import repository.Repository;
@@ -11,9 +14,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.example.utils.ConexionBaseDatos.getConnection;
+
+@NoArgsConstructor
+
 public class SubjectRepositoryImpl implements Repository<SubjectDto> {
-    private Connection getConnection() throws SQLException {
-        return ConexionDB.getInstance();
+    private Connection conn;
+    public SubjectRepositoryImpl(Connection conn) {
+        this.conn = conn;
     }
 
     private Subject buildObject(ResultSet resultSet) throws
@@ -40,8 +48,8 @@ public class SubjectRepositoryImpl implements Repository<SubjectDto> {
                 Subject Subject = buildObject(resultSet);
                 SubjectList.add(Subject);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ServiceJdbcException("Unable to list info");
         }
         return SubjectMapper.mapFrom(SubjectList);
     }
@@ -58,8 +66,8 @@ public class SubjectRepositoryImpl implements Repository<SubjectDto> {
                 Subject = buildObject(resultSet);
             }
             resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ServiceJdbcException("Unable to search info");
         }
         return SubjectMapper.mapFrom(Subject);
     }
@@ -80,8 +88,9 @@ public class SubjectRepositoryImpl implements Repository<SubjectDto> {
                 stmt.setLong(3, Subject.id_Subject());
             }
             stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ServiceJdbcException("Unable to save info");
+
         }
     }
 
@@ -90,8 +99,8 @@ public class SubjectRepositoryImpl implements Repository<SubjectDto> {
         try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM subjects WHERE id_subject =?")) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
-        } catch (SQLException throwables){
-            throwables.printStackTrace();
+        } catch (SQLException | ClassNotFoundException throwables ){
+            throw new ServiceJdbcException("Unable to delete info");
         }
     }
 }

@@ -2,6 +2,7 @@ package repository.repositoryImpl;
 
 import org.example.conexion.ConexionDB;
 import org.example.domain.Teacher;
+import org.example.exception.ServiceJdbcException;
 import org.example.mapping.dto.TeacherDto;
 import org.example.mapping.mappers.TeacherMapper;
 import repository.Repository;
@@ -10,10 +11,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeacherRepositoryImpl implements Repository<TeacherDto> {
-    private Connection getConnection() throws SQLException {
-        return ConexionDB.getInstance();
+import static org.example.utils.ConexionBaseDatos.getConnection;
+
+public class    TeacherRepositoryImpl implements Repository<TeacherDto> {
+    private Connection conn;
+    public TeacherRepositoryImpl(Connection conn) {
+        this.conn = conn;
     }
+
 
     private Teacher buildObject(ResultSet resultSet) throws
             SQLException {
@@ -34,8 +39,8 @@ public class TeacherRepositoryImpl implements Repository<TeacherDto> {
                 Teacher teacher = buildObject(resultSet);
                 teacherList.add(teacher);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ServiceJdbcException("Unable to list info");
         }
         return TeacherMapper.mapFrom(teacherList);
     }
@@ -51,8 +56,8 @@ public class TeacherRepositoryImpl implements Repository<TeacherDto> {
                 teacher = buildObject(resultSet);
             }
             resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ServiceJdbcException("Unable to find info");
         }
         return TeacherMapper.mapFrom(teacher);
     }
@@ -73,8 +78,8 @@ public class TeacherRepositoryImpl implements Repository<TeacherDto> {
                 stmt.setLong(3, teacher.id_Teacher());
             }
             stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ServiceJdbcException("Unable to save info");
         }
     }
 
@@ -83,8 +88,8 @@ public class TeacherRepositoryImpl implements Repository<TeacherDto> {
         try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM teachers WHERE id_teachers =?")) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
-        } catch (SQLException throwables){
-            throwables.printStackTrace();
+        } catch (SQLException | ClassNotFoundException throwables){
+            throw new ServiceJdbcException("Unable to delete info");
         }
     }
 }

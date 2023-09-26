@@ -24,10 +24,6 @@ public class StudentJson extends HttpServlet {
     public StudentRespositoryLogicImpl student;
     public StudentService service;
 
-    public StudentJson() {
-        student = new StudentRespositoryLogicImpl();
-        service = new StudentServiceImpl(student);
-    }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {

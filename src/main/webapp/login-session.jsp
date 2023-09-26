@@ -1,7 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<form action="login" method="post">
+<form action="login-session" method="post">
   <div>
     <label for="username">Username</label>
     <div>

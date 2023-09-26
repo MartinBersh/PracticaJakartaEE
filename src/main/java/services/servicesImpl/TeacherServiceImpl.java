@@ -3,8 +3,11 @@ package services.servicesImpl;
 import lombok.NoArgsConstructor;
 import org.example.conexion.ConexionDB;
 import org.example.domain.Teacher;
+import org.example.mapping.dto.StudentDto;
 import org.example.mapping.dto.TeacherDto;
 import org.example.mapping.mappers.TeacherMapper;
+import repository.Repository;
+import repository.repositoryImpl.StudentRepositoryImp;
 import repository.repositoryImpl.StudentRespositoryLogicImpl;
 import repository.repositoryImpl.TeacherRepositoryImpl;
 import repository.repositoryImpl.TeacherRepositoryLogicImpl;
@@ -17,11 +20,11 @@ import java.util.List;
 
 
 public class TeacherServiceImpl implements TeacherService {
-    TeacherRepositoryLogicImpl repo =  new TeacherRepositoryLogicImpl();
-
-    public TeacherServiceImpl(TeacherRepositoryLogicImpl repository) {
-        this.repo = repository;
+    private Repository<TeacherDto> repo;
+    public TeacherServiceImpl(Connection connection) {
+        this.repo = new TeacherRepositoryImpl(connection);
     }
+
     @Override
     public List<TeacherDto> list() {
         return repo.list();
