@@ -15,8 +15,9 @@ import java.util.List;
 
 public class GradesRepositoryImp implements Repository<GradesDto> {
 
-    private Connection getConnection() throws SQLException {
-        return ConexionDB.getInstance();
+    private Connection conn;
+    public GradesRepositoryImp(Connection conn) {
+        this.conn = conn;
     }
 
 
@@ -51,7 +52,7 @@ public class GradesRepositoryImp implements Repository<GradesDto> {
     @Override
     public List<GradesDto> list() {
         List<Grades> gradesList = new ArrayList<>();
-        try (Statement statement = getConnection().createStatement();
+        try (Statement statement = conn.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT student.id_student ,student.name, student.email," +
                      " student.career, student.semester, subject.name, teachers.name, teachers.email, grades.corte FROM" +
                      " grades INNER JOIN student on grades.id_student=student.id_student INNER JOIN subject on " +
@@ -70,7 +71,7 @@ public class GradesRepositoryImp implements Repository<GradesDto> {
     @Override
     public GradesDto byId(Long id) {
         Grades grades = null;
-        try (PreparedStatement preparedStatement = getConnection()
+        try (PreparedStatement preparedStatement = conn
                 .prepareStatement("SELECT student.id_student ,student.name, student.email, student.career, " +
                         "student.semester, subject.name, teachers.name, teachers.email, grades.corte FROM grades " +
                         "INNER JOIN student on grades.id_student=student.id_student INNER JOIN subject on " +
@@ -97,13 +98,13 @@ public class GradesRepositoryImp implements Repository<GradesDto> {
         } else {
             sql = "INSERT INTO grades (id_student, id,subject, corte) VALUES(?,?)";
         }
-        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, grades.student().getId_Student());
             stmt.setLong(2, grades.subject().getId_Subject());
             stmt.setString(3, grades.corte());
 
             if (grades.id_Grades() != null && grades.id_Grades() > 0) {
-                stmt.setLong(3, grades.id_Grades());
+                stmt.setLong(4, grades.id_Grades());
             }
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -113,7 +114,7 @@ public class GradesRepositoryImp implements Repository<GradesDto> {
 
     @Override
     public void delete(Long id) {
-        try (PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM gradess WHERE id_grades =?")) {
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM gradess WHERE id_grades =?")) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException throwables) {

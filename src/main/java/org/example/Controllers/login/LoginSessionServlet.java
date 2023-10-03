@@ -1,10 +1,9 @@
-package org.example.Controllers;
+package org.example.Controllers.login;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import services.LoginService;
-import services.servicesImpl.LoginServiceImpl;
 import services.servicesImpl.LoginServiceSessionImpl;
 
 import java.io.IOException;

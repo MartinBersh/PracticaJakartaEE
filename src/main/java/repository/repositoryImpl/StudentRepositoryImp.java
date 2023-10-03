@@ -23,7 +23,7 @@ public class StudentRepositoryImp implements Repository<StudentDto> {
     private Student createStudent(ResultSet rs) throws SQLException {
         Student student = new Student();
         student.setId_Student(rs.getLong("id_student"));
-        student.setName(rs.getString("nombre"));
+        student.setName(rs.getString("name"));
         student.setEmail(rs.getString("email"));
         student.setCareer(rs.getString("career"));
         student.setSemester(rs.getString("semester"));
@@ -34,7 +34,7 @@ public class StudentRepositoryImp implements Repository<StudentDto> {
         List<Student> studentList = new ArrayList<>();
 
         try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * from students")) {
+             ResultSet rs = stmt.executeQuery("SELECT * from student")) {
             while (rs.next()) {
                 Student ps= createStudent(rs);
                 studentList.add(ps);
@@ -74,9 +74,10 @@ public class StudentRepositoryImp implements Repository<StudentDto> {
             pstmt.setString(1, student.name());
             pstmt.setString(2, student.career());
             pstmt.setString(3, student.email());
+            pstmt.setString(4, student.semester());
 
             if (student.id_Student() != null && student.id_Student() > 0) {
-                pstmt.setLong(4, student.id_Student());
+                pstmt.setLong(5, student.id_Student());
             }
             pstmt.executeUpdate();
         } catch (SQLException throwables) {

@@ -1,29 +1,91 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="java.util.Map"%>
+<%@ page import="java.util.List" %>
+<%@ page import="org.example.mapping.dto.TeacherDto" %>
+<%
+  List<String> errores = (List<String>)request.getAttribute("errores");
+%>
+<%
+  Map<String,String> errorsmap = (Map<String,String>)request.getAttribute("errorsmap");
+%>
+<%
+List<TeacherDto> teachers = (List<TeacherDto>)getServletContext().getAttribute("teacherDtoList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Clases</title>
+  <title>Subject CRUD</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-<h3><%= "Formulario Clases" %>
-</h3>
+<h3><%= "Formulario Asignaturas" %></h3>
 
 <form action="subject-form" method="post">
   <div class="row mb-3">
     <label for="name" class="col-form-label col-sm-2">Name</label>
     <div class="col-sm-4"><input type="text" name="name" id="name" class="form-control"></div>
+    <%
+      if(errorsmap != null && errorsmap.containsKey("name")){
+        out.println("<div class='row mb-3 alert alert-danger col-sm-4'" +
+                "style='color: red;'>"+ errorsmap.get("name") + "</div>");
+      }else
+    %>
   </div>
+
   <div class="row mb-3">
-    <label for="teacherName" class="col-form-label col-sm-2">Teacher</label>
-    <div class="col-sm-4"><input type="text" name="teacherName" id="teacherName" class="form-control"></div>
+    <%
+      if(teachers != null && !teachers.isEmpty()){
+    %>
+    <label for="teacher" class="col-form-label col-sm-2">Profesor</label>
+      <div class="col-sm-4">
+    <select id="teacher" name="teacher">
+      <%for (TeacherDto teacher: teachers) { %>
+      <option><%=teacher.name()%></option>
+      <% } %>
+      <% } %>
+    </select>
+      </div>
   </div>
+
   <div class="row mb-3">
-    <label for="teacherEmail" class="col-form-label col-sm-2">Teacher Email</label>
-    <div class="col-sm-4"><input type="text" name="teacherEmail" id="teacherEmail" class="form-control"></div>
-  </div>
+    <div>
+      <input type="submit" value="Actualizar" class="btn btn-primary">
+    </div>
   </div>
 </form>
 <br/>
-<a href="subject-form">Vamos a SubjectController</a>
+<h3><%= "Consultar por ID" %>
+</h3>
+<form action="subjectbyid" method="post">
+  <div class="row mb-3">
+    <label for="id_subject" class="col-form-label col-sm-2">Id de la asignatura</label>
+    <div class="col-sm-4"><input type="text" name="id_subject" id="id_subject" class="form-control"></div>
+    <div class="row mb-3">
+      <div>
+        <input type="submit" value="Buscar" class="btn btn-primary">
+      </div>
+    </div>
+  </div>
+</form>
+<br/>
+<h3><%= "Eliminar por ID" %>
+</h3>
+<form action="subjectdelete" method="post">
+  <div class="row mb-3">
+    <label for="id_subject2" class="col-form-label col-sm-2">Id de la asignatura</label>
+    <div class="col-sm-4"><input type="text" name="id_subject2" id="id_subject2" class="form-control"></div>
+    <div class="row mb-3">
+      <div>
+        <input type="submit" value="Eliminar" class="btn btn-primary">
+      </div>
+    </div>
+  </div>
+</form>
+<br/>
+<h3><%= "Lista de asignaturas" %></h3>
+<a href="subject-form">Vamos a listar asignaturas</a>
 </body>
 </html>

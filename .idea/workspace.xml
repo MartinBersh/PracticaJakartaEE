@@ -10,37 +10,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92d17ead-4743-44ee-936d-9c9b69361a46" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/LoginSessionServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/LogoutServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentById.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exception/ServiceJdbcException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/filters/LoginFiltro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/listener/ApplicationListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/ConexionBaseDatos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/ConnectionFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/services/LoginService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/services/servicesImpl/LoginServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/services/servicesImpl/LoginServiceSessionImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/login-session.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/student-by-Id.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/grades/GradeById.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/grades/GradeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/grades/GradeDelete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/student/StudentById.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/student/StudentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/student/StudentDelete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/subject/SubjectById.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/subject/SubjectController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/subject/SubjectDelete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/teacher/TeacherById.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/teacher/TeacherController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/teacher/TeacherDelete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/grades.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentXLS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentXLS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/SubjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/SubjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/TeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/TeacherController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/login/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/LoginSessionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/login/LoginSessionServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/login/LogoutServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentById.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/student/StudentJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/StudentXLS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/student/StudentXLS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/SubjectController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controllers/TeacherController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapping/dto/GradesDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mapping/dto/GradesDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapping/dto/StudentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mapping/dto/StudentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapping/dto/SubjectDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mapping/dto/SubjectDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapping/dto/TeacherDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mapping/dto/TeacherDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/repositoryImpl/GradesRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/repositoryImpl/GradesRepositoryImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/repositoryImpl/StudentRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/repositoryImpl/StudentRepositoryImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/repositoryImpl/SubjectRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/repositoryImpl/SubjectRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/repositoryImpl/TeacherRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/repositoryImpl/TeacherRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/servicesImpl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/SubjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/servicesImpl/SubjectServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/TeacherServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/servicesImpl/TeacherServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/GradesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/GradesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/SubjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/SubjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/TeacherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/TeacherService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/GradesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/servicesImpl/GradesServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/servicesImpl/LoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/LoginServiceSessionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/servicesImpl/LoginServiceSessionImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/servicesImpl/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/SubjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/servicesImpl/SubjectServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/servicesImpl/TeacherServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/servicesImpl/TeacherServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/student-by-Id.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/student-by-Id.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/student.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/student.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/subject.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/subject.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/teacher.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/teacher.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,8 +68,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -106,6 +120,7 @@
       <recent name="C:\Users\marti\OneDrive\Escritorio\Java\PracticaJakartaEE\src\main\java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marti\OneDrive\Escritorio\Java\PracticaJakartaEE\src\main\java\org\example" />
       <recent name="C:\Users\marti\OneDrive\Escritorio\Java\PracticaJakartaEE\src\main\webapp" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -217,6 +232,9 @@
       <workItem from="1695213167582" duration="5031000" />
       <workItem from="1695404862954" duration="9776000" />
       <workItem from="1695643712390" duration="13664000" />
+      <workItem from="1695816872098" duration="5427000" />
+      <workItem from="1696248333887" duration="13573000" />
+      <workItem from="1696337665519" duration="8834000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1695064613465</created>
@@ -269,5 +287,21 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit" />
     <option name="LAST_COMMIT_MESSAGE" value="commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/repository/repositoryImpl/StudentRepositoryImp.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/repository/repositoryImpl/StudentRepositoryImp.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package org.example.Controllers;
+package org.example.Controllers.student;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

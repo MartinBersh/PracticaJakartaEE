@@ -1,4 +1,4 @@
-package org.example.Controllers;
+package org.example.Controllers.login;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -6,13 +6,13 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.LoginService;
-import services.servicesImpl.LoginServiceImpl;
+import org.example.mapping.dto.TeacherDto;
+import services.servicesImpl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.Optional;
+import java.util.List;
 
 
 @WebServlet("/login")
@@ -25,9 +25,16 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
         String username = req.getParameter("username");
-        String password = req.getParameter("pass");
+        String password = req.getParameter("password");
         if (USERNAME.equals(username) && PASSWORD.equals(password)) {
-            resp.setContentType("text/html;charset=UTF-8");
+
+            Cookie usernameCookie = new Cookie("username", username);
+            resp.addCookie(usernameCookie);
+            Connection conn = (Connection) req.getAttribute("conn");
+            services.TeacherService service = new TeacherServiceImpl(conn);
+            List<TeacherDto> teacherDtosList = service.list();
+            getServletContext().setAttribute("teacherDtoList", teacherDtosList);
+
             try (PrintWriter out = resp.getWriter()) {
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");

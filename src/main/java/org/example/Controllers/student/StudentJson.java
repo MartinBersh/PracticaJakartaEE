@@ -1,4 +1,4 @@
-package org.example.Controllers;
+package org.example.Controllers.student;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
