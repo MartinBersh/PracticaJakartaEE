@@ -6,10 +6,10 @@ import org.example.mapping.dto.GradesDto;
 import org.example.mapping.dto.StudentDto;
 import org.example.mapping.dto.SubjectDto;
 import org.example.mapping.dto.TeacherDto;
-import services.servicesImpl.GradesServiceImpl;
-import services.servicesImpl.StudentServiceImpl;
-import services.servicesImpl.SubjectServiceImpl;
-import services.servicesImpl.TeacherServiceImpl;
+import org.example.services.servicesImpl.GradesServiceImpl;
+import org.example.services.servicesImpl.StudentServiceImpl;
+import org.example.services.servicesImpl.SubjectServiceImpl;
+import org.example.services.servicesImpl.TeacherServiceImpl;
 
 import java.sql.Connection;
 import java.sql.SQLException;

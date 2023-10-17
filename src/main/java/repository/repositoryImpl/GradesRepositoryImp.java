@@ -1,6 +1,9 @@
 package repository.repositoryImpl;
 
-import org.example.conexion.ConexionDB;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import lombok.NoArgsConstructor;
+import org.example.anotations.MysqlConn;
 import org.example.domain.Grades;
 import org.example.domain.Student;
 import org.example.domain.Subject;
@@ -13,8 +16,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
+@NoArgsConstructor
+
 public class GradesRepositoryImp implements Repository<GradesDto> {
 
+    @Inject
+    @MysqlConn
     private Connection conn;
     public GradesRepositoryImp(Connection conn) {
         this.conn = conn;

@@ -4,8 +4,8 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.LoginService;
-import services.servicesImpl.LoginServiceSessionImpl;
+import org.example.services.LoginService;
+import org.example.services.servicesImpl.LoginServiceSessionImpl;
 
 import java.io.IOException;
 import java.util.Optional;

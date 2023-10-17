@@ -1,12 +1,15 @@
-package services.servicesImpl;
+package org.example.services.servicesImpl;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import services.LoginService;
+import org.example.anotations.Login;
+import org.example.services.LoginService;
 
 import java.util.Arrays;
 import java.util.Optional;
-
+@ApplicationScoped
+@Login
 public class LoginServiceImpl implements LoginService {
     @Override
     public Optional<String> getUsername(HttpServletRequest req) {

@@ -1,5 +1,6 @@
 package org.example.Controllers.student;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServlet;
 
 
@@ -8,8 +9,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.StudentService;
-import services.servicesImpl.StudentServiceImpl;
+import org.example.services.StudentService;
+import org.example.services.servicesImpl.StudentServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,11 +18,13 @@ import java.sql.Connection;
 
 @WebServlet("/studentdelete")
 public class StudentDelete extends HttpServlet {
+
+    @Inject
+    private StudentService service;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        StudentService service = new StudentServiceImpl(conn);
         String idString = req.getParameter("id_student2");
         try {
             Long id = Long.parseLong(idString);

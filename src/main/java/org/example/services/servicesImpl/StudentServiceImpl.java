@@ -1,27 +1,23 @@
-package services.servicesImpl;
+package org.example.services.servicesImpl;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import lombok.NoArgsConstructor;
-import org.example.conexion.ConexionDB;
-import org.example.domain.Student;
-import org.example.exception.ServiceJdbcException;
+import org.example.anotations.Login;
 import org.example.mapping.dto.StudentDto;
-import org.example.mapping.mappers.StudentMapper;
+import org.example.services.StudentService;
 import repository.Repository;
-import repository.repositoryImpl.StudentRepositoryImp;
-import repository.repositoryImpl.StudentRespositoryLogicImpl;
-import services.StudentService;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 @NoArgsConstructor
+@ApplicationScoped
 
 public class StudentServiceImpl implements StudentService {
 
+    @Inject
+    @Named("defaultRepository")
     private Repository<StudentDto> repo;
-    public StudentServiceImpl(Connection connection) {
-        this.repo = new StudentRepositoryImp(connection);
-    }
 
     @Override
     public List<StudentDto> list() {

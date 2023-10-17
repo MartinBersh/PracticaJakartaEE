@@ -1,28 +1,28 @@
 package org.example.Controllers.student;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.mapping.dto.StudentDto;
-import repository.repositoryImpl.StudentRespositoryLogicImpl;
-import services.StudentService;
-import services.servicesImpl.StudentServiceImpl;
+import org.example.services.StudentService;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.util.Optional;
+
 
 @WebServlet("/byid")
 public class StudentById extends HttpServlet {
 
+    @Inject
+    private StudentService service;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        StudentService service = new StudentServiceImpl(conn);
         String idString = req.getParameter("id_student");
         try {
             Long id = Long.parseLong(idString);
@@ -52,8 +52,6 @@ public class StudentById extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
-        Connection conn = (Connection) request.getAttribute("conn");
-        StudentService service = new StudentServiceImpl(conn);
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("h1></h1>");

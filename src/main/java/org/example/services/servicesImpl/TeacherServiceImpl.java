@@ -1,29 +1,23 @@
-package services.servicesImpl;
+package org.example.services.servicesImpl;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.NoArgsConstructor;
-import org.example.conexion.ConexionDB;
-import org.example.domain.Teacher;
-import org.example.mapping.dto.StudentDto;
+import lombok.extern.java.Log;
+import org.example.anotations.Login;
 import org.example.mapping.dto.TeacherDto;
-import org.example.mapping.mappers.TeacherMapper;
+import org.example.services.TeacherService;
 import repository.Repository;
-import repository.repositoryImpl.StudentRepositoryImp;
-import repository.repositoryImpl.StudentRespositoryLogicImpl;
-import repository.repositoryImpl.TeacherRepositoryImpl;
-import repository.repositoryImpl.TeacherRepositoryLogicImpl;
-import services.TeacherService;
 
-import java.sql.*;
-import java.util.ArrayList;
+
 import java.util.List;
 @NoArgsConstructor
-
+@ApplicationScoped
 
 public class TeacherServiceImpl implements TeacherService {
+
+    @Inject
     private Repository<TeacherDto> repo;
-    public TeacherServiceImpl(Connection connection) {
-        this.repo = new TeacherRepositoryImpl(connection);
-    }
 
     @Override
     public List<TeacherDto> list() {

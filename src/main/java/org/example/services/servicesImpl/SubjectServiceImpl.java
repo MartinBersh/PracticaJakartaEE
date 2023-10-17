@@ -1,24 +1,22 @@
-package services.servicesImpl;
+package org.example.services.servicesImpl;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
+import org.example.anotations.Login;
 import org.example.mapping.dto.SubjectDto;
+import org.example.services.SubjectService;
 import repository.Repository;
-import repository.repositoryImpl.StudentRespositoryLogicImpl;
-import repository.repositoryImpl.SubjectRepositoryImpl;
-import repository.repositoryImpl.SubjectRepositoryLogicImpl;
-import services.SubjectService;
 
-import java.sql.Connection;
 import java.util.List;
 @NoArgsConstructor
-
+@ApplicationScoped
 
 public class SubjectServiceImpl implements SubjectService {
-    private Repository<SubjectDto> repo;
 
-    public SubjectServiceImpl(Connection connection){
-        this.repo = new SubjectRepositoryImpl(connection);
-    }
+    @Inject
+    private Repository<SubjectDto> repo;
     @Override
     public List<SubjectDto> list() {
         return repo.list();

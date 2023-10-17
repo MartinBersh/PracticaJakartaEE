@@ -1,10 +1,16 @@
-package services.servicesImpl;
+package org.example.services.servicesImpl;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import services.LoginService;
+import lombok.extern.java.Log;
+import org.example.anotations.Login;
+import org.example.services.LoginService;
 
 import java.util.Optional;
+import jakarta.enterprise.context.SessionScoped;
+
+@ApplicationScoped
 
 public class LoginServiceSessionImpl implements LoginService {
     @Override

@@ -1,12 +1,13 @@
 package org.example.Controllers.teacher;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.TeacherService;
-import services.servicesImpl.TeacherServiceImpl;
+import org.example.services.TeacherService;
+import org.example.services.servicesImpl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,10 +16,10 @@ import java.sql.Connection;
 
 @WebServlet("/teacherdelete")
 public class TeacherDelete extends HttpServlet {
+    @Inject
+    private TeacherService service;
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        TeacherService service = new TeacherServiceImpl(conn);
         String idString = req.getParameter("id_teacher2");
         try {
             Long id = Long.parseLong(idString);

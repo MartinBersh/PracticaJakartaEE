@@ -1,6 +1,7 @@
 package org.example.Controllers.subject;
 
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,9 +12,8 @@ import org.example.mapping.dto.SubjectDto;
 
 import org.example.mapping.dto.TeacherDto;
 import org.example.mapping.mappers.TeacherMapper;
-import services.SubjectService;
-
-import services.servicesImpl.SubjectServiceImpl;
+import org.example.services.SubjectService;
+import org.example.services.servicesImpl.SubjectServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,6 +27,8 @@ import java.util.Map;
 
 public class SubjectController extends HttpServlet {
 
+    @Inject
+    private SubjectService service;
     private String message;
 
     public void init(){
@@ -36,8 +38,6 @@ public class SubjectController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
-        Connection conn = (Connection) request.getAttribute("conn");
-        SubjectService service = new SubjectServiceImpl(conn);
 
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
@@ -49,8 +49,6 @@ public class SubjectController extends HttpServlet {
     protected  void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html");
 
-        Connection conn = (Connection) req.getAttribute("conn");
-        SubjectService service = new SubjectServiceImpl(conn);
         String name = req.getParameter("name");
         List<String> errores = getErrors(name);
         Map<String,String> errorsmap = getErrors2(name);

@@ -1,5 +1,6 @@
 package org.example.Controllers.student;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,8 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.mapping.dto.StudentDto;
 import repository.repositoryImpl.StudentRespositoryLogicImpl;
-import services.StudentService;
-import services.servicesImpl.StudentServiceImpl;
+import org.example.services.StudentService;
+import org.example.services.servicesImpl.StudentServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,8 +20,8 @@ import java.util.List;
 public class StudentXLS extends HttpServlet {
 
 
-    public StudentRespositoryLogicImpl student;
-    public StudentService service;
+    @Inject
+    private StudentService service;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,

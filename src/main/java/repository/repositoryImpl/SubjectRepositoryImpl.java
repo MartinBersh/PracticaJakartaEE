@@ -1,7 +1,10 @@
 package repository.repositoryImpl;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.example.anotations.MysqlConn;
 import org.example.conexion.ConexionDB;
 import org.example.domain.Subject;
 import org.example.domain.Teacher;
@@ -17,8 +20,11 @@ import java.util.List;
 import static org.example.utils.ConexionBaseDatos.getConnection;
 
 @NoArgsConstructor
-
+@ApplicationScoped
 public class SubjectRepositoryImpl implements Repository<SubjectDto> {
+
+    @Inject
+    @MysqlConn
     private Connection conn;
     public SubjectRepositoryImpl(Connection conn) {
         this.conn = conn;
@@ -48,8 +54,10 @@ public class SubjectRepositoryImpl implements Repository<SubjectDto> {
                 Subject Subject = buildObject(resultSet);
                 SubjectList.add(Subject);
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new ServiceJdbcException("Unable to list info");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return SubjectMapper.mapFrom(SubjectList);
     }

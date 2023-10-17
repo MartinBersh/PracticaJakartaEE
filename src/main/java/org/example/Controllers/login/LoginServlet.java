@@ -1,5 +1,6 @@
 package org.example.Controllers.login;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -7,7 +8,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.mapping.dto.TeacherDto;
-import services.servicesImpl.TeacherServiceImpl;
+import org.example.services.LoginService;
+import org.example.services.TeacherService;
+import org.example.services.servicesImpl.TeacherServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +24,11 @@ public class LoginServlet extends HttpServlet {
     final static String USERNAME = "admin";
     final static String PASSWORD = "12345";
 
+    @Inject
+    LoginService auth;
+    @Inject
+    TeacherService service;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
@@ -30,8 +38,6 @@ public class LoginServlet extends HttpServlet {
 
             Cookie usernameCookie = new Cookie("username", username);
             resp.addCookie(usernameCookie);
-            Connection conn = (Connection) req.getAttribute("conn");
-            services.TeacherService service = new TeacherServiceImpl(conn);
             List<TeacherDto> teacherDtosList = service.list();
             getServletContext().setAttribute("teacherDtoList", teacherDtosList);
 

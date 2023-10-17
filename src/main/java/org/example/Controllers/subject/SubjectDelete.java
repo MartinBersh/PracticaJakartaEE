@@ -1,13 +1,14 @@
 package org.example.Controllers.subject;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.SubjectService;
-import services.servicesImpl.SubjectServiceImpl;
+import org.example.services.SubjectService;
+import org.example.services.servicesImpl.SubjectServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,11 +17,13 @@ import java.sql.Connection;
 @WebServlet("/subjectdelete")
 
 public class SubjectDelete extends HttpServlet {
+
+    @Inject
+    private SubjectService service;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        SubjectService service = new SubjectServiceImpl(conn);
+
         String idString = req.getParameter("id_subject2");
         try {
             Long id = Long.parseLong(idString);

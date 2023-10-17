@@ -1,30 +1,22 @@
-package services.servicesImpl;
+package org.example.services.servicesImpl;
 
-import lombok.NoArgsConstructor;
-import org.example.conexion.ConexionDB;
-import org.example.domain.Grades;
-import org.example.domain.Student;
-import org.example.domain.Subject;
-import org.example.domain.Teacher;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import org.example.anotations.Login;
 import org.example.mapping.dto.GradesDto;
-import org.example.mapping.dto.StudentDto;
-import org.example.mapping.mappers.GradesMapper;
+import org.example.services.GradesService;
 import repository.Repository;
-import repository.repositoryImpl.GradesRepositoryImp;
-import repository.repositoryImpl.StudentRepositoryImp;
-import services.GradesService;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
-@NoArgsConstructor
+
+@ApplicationScoped
 
 public class GradesServiceImpl implements GradesService {
 
+    @Inject
+    private Repository<GradesDto> gradeRepository;
     private Repository<GradesDto> repo;
-    public GradesServiceImpl(Connection connection) {
-        this.repo = new GradesRepositoryImp(connection);
-    }
+
 
     @Override
     public List<GradesDto> list() {

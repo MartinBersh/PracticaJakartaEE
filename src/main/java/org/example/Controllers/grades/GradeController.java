@@ -1,16 +1,16 @@
 package org.example.Controllers.grades;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.mapping.dto.GradesDto;
-import services.GradesService;
-import services.servicesImpl.GradesServiceImpl;
+import org.example.services.GradesService;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +18,12 @@ import java.util.Map;
 
 @WebServlet(name = "gradeController", value = "/grades-form")
 public class GradeController extends HttpServlet {
+
+    @Inject
+    public GradesService service;
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
-        Connection conn = (Connection) request.getAttribute("conn");
-        GradesService service = new GradesServiceImpl(conn);
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("h1>Students</h1>");
@@ -33,8 +34,6 @@ public class GradeController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html");
 
-        Connection conn = (Connection) req.getAttribute("conn");
-        GradesService service = new GradesServiceImpl(conn);
         String corte = req.getParameter("corte");
         List<String> errores = getErrors( corte);
         Map<String, String> errorsmap = getErrors2(corte);

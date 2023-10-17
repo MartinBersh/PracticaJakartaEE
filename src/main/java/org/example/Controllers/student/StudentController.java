@@ -1,17 +1,15 @@
 package org.example.Controllers.student;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.domain.Student;
 import org.example.mapping.dto.StudentDto;
-import org.example.mapping.mappers.StudentMapper;
 import repository.repositoryImpl.StudentRepositoryImp;
-import repository.repositoryImpl.StudentRespositoryLogicImpl;
-import services.StudentService;
-import services.servicesImpl.StudentServiceImpl;
+import org.example.services.StudentService;
+import org.example.services.servicesImpl.StudentServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,21 +23,12 @@ import java.util.Map;
 
 public class StudentController extends HttpServlet {
 
-    public StudentRepositoryImp studentRepository;
-    public StudentService service;
+    @Inject
+    private StudentService service;
 
-    private String message;
-
-    public void init() {
-        message = "Students";
-    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-        Connection conn = (Connection) request.getAttribute("conn");
-        studentRepository = new StudentRepositoryImp(conn);
-        service = new StudentServiceImpl(conn);
-
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1>Students</h1>");
@@ -50,9 +39,6 @@ public class StudentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        Connection conn = (Connection) req.getAttribute("conn");
-        studentRepository = new StudentRepositoryImp(conn);
-        service = new StudentServiceImpl(conn);
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String semester = req.getParameter("semester");

@@ -1,0 +1,5 @@
+setInitialSize(int initialSize): se encarga de determinar el tamaño inicial de la pool de conextiones. da la cantidad de conexiones que estarán disponibles.
+
+setMinIdle(int minIdle): Este da la cantidad minima de conexiones inactivas pool en todo momento del proceso.
+
+setMaxIdle(int maxIdle): Determina la cantidad máxima de conexiones inactivas al mismo tiempo en la pool. 

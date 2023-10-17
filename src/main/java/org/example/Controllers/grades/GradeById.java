@@ -1,12 +1,12 @@
 package org.example.Controllers.grades;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.mapping.dto.GradesDto;
-import services.GradesService;
-import services.servicesImpl.GradesServiceImpl;
+import org.example.services.GradesService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,11 +14,12 @@ import java.sql.Connection;
 
 @WebServlet("/gradesbyid")
 public class GradeById extends HttpServlet{
+
+    @Inject
+    private GradesService service;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        GradesService service = new GradesServiceImpl(conn);
         String idString = req.getParameter("id_grades");
         try {
             Long id = Long.parseLong(idString);
@@ -38,7 +39,7 @@ public class GradeById extends HttpServlet{
                     out.println("</html>");
                 }
             } else {
-                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No existe un estudiante con este id");
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No existen notas con este id");
             }
         } catch (NumberFormatException e) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "El 'id' ingresado no es un número válido.");

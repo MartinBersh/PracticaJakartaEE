@@ -1,6 +1,7 @@
 package org.example.Controllers.student;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.domain.Student;
 import org.example.mapping.dto.StudentDto;
 import repository.repositoryImpl.StudentRespositoryLogicImpl;
-import services.StudentService;
-import services.servicesImpl.StudentServiceImpl;
+import org.example.services.StudentService;
+import org.example.services.servicesImpl.StudentServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,9 +22,8 @@ import java.util.List;
 
 public class StudentJson extends HttpServlet {
 
-    public StudentRespositoryLogicImpl student;
-    public StudentService service;
-
+    @Inject
+    private StudentService service;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {

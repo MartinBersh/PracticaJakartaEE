@@ -1,13 +1,15 @@
 package org.example.Controllers.teacher;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.mapping.dto.TeacherDto;
-import services.TeacherService;
-import services.servicesImpl.TeacherServiceImpl;
+import org.example.services.TeacherService;
+import org.example.services.servicesImpl.TeacherServiceImpl;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,12 +22,12 @@ import java.util.Map;
 @WebServlet(name = "teacherController", value = "/teacher-form")
 
 public class TeacherController extends HttpServlet {
+    @Inject
+    private TeacherService service;
 
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-        Connection conn = (Connection) request.getAttribute("conn");
-        TeacherService service = new TeacherServiceImpl(conn);
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("h1>Teachers</h1>");
@@ -35,8 +37,6 @@ public class TeacherController extends HttpServlet {
 
     protected  void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html");
-        Connection conn = (Connection) req.getAttribute("conn");
-        TeacherService service = new TeacherServiceImpl(conn);
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         List<String> errores = getErrors(name,email);

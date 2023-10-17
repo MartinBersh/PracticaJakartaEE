@@ -1,6 +1,9 @@
 package repository.repositoryImpl;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.NoArgsConstructor;
+import org.example.anotations.MysqlConn;
 import org.example.conexion.ConexionDB;
 import org.example.domain.Student;
 import org.example.exception.ServiceJdbcException;
@@ -13,8 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-
+@ApplicationScoped
 public class StudentRepositoryImp implements Repository<StudentDto> {
+
+    @Inject
+    @MysqlConn
     private Connection conn;
     public StudentRepositoryImp(Connection conn) {
         this.conn = conn;
